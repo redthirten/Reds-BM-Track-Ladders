@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+  <material>
+    <preview>textures/editor_box_top.jpg</preview>
+    <renderpass>
+      <transparency mode="opaque"/>
+      <linearshading/>
+      <texunit>
+        <map>textures/editor_box_top.jpg</map>
+        <tcgen mode="base"/>
+      </texunit>
+    </renderpass>
+    <option norender="true"/>
+    <option nonsolid="true"/>
+    <option noshadowcast="true"/>
+    <option noshadowreceive="true"/>
+  </material>
+</root>

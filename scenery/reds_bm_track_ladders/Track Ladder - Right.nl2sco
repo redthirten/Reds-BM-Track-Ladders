@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+  <sceneobject>
+    <model path="models/ladder_right.dae">
+      <clip distance="35"/>
+    </model>
+    <description>Scripted ladder rungs that attach along the right-side of B&amp;M track spine.</description>
+    <preview>materials/textures/editor_box_right.jpg</preview>
+    <param hiderot="true"/>
+    <param allowscale="false"/>
+    <usercolor>
+      <label>Ladder Color</label>
+      <index>0</index>
+      <defaultcolor r="0.32549" g="0.482353" b="0.65098"/>
+    </usercolor>
+    <script>
+      <classpath>scripts</classpath>
+      <class>TrackLadder</class>
+      <sharedvm>true</sharedvm>
+      <resource id="LICENSE">LICENSE</resource>
+    </script>
+    <scriptparameter>
+      <type>int</type>
+      <defaultvalue>25</defaultvalue>
+      <id>num_rungs</id>
+      <description>Number of ladder rungs to place along the track spine.</description>
+      <label>Number of Rungs (Max 50):</label>
+    </scriptparameter>
+    <scriptparameter>
+      <type>double</type>
+      <defaultvalue>0.4</defaultvalue>
+      <id>rung_spacing</id>
+      <description>How far apart each ladder rung should be from each other.</description>
+      <label>Rung Spacing (Meters):</label>
+    </scriptparameter>
+    <scriptparameter>
+      <type>bool</type>
+      <defaultvalue>false</defaultvalue>
+      <id>reverse_direction</id>
+      <description>Reverses the placement direction to go against track direction of travel.</description>
+      <label>Reverse Placement Direction</label>
+    </scriptparameter>
+    <materialpath name="editor_box">materials/editor_box_right.nl2mat</materialpath>
+    <materialpath name="metal">materials/metal_user0_no_editor.nl2mat</materialpath>
+  </sceneobject>
+</root>

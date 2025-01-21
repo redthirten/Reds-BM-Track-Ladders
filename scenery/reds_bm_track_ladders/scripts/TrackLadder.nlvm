@@ -1,0 +1,85 @@
+/**
+	Track Ladder NL2 Script
+	David Wolfe (Red-Thirten)
+	01/17/2025
+	Attaches elements of the Track Ladder SCO (ie. "rungs") along the length of the closest track.
+        Number of rungs, their spacing, and direction of travel are dictated by entity parameters.
+	Licensed under GNU GPLv3 - See LICENSE for more details.
+*/
+
+import com.nolimitscoaster.Script;
+import com.nolimitscoaster.SceneObject;
+import com.nolimitscoaster.SceneObjectElement;
+import com.nolimitscoaster.TrackPos;
+import nlvm.math3d.Matrix4x4f;
+
+public class TrackLadder extends Script{
+    private static final String SCRIPT_NAME = "B&M Track Ladder";
+    // All supported coaster style IDs in NL2, as of this file's creation date
+    private static final int[] BM_STYLE_IDS = {3, 4, 6, 7, 8, 23, 63, 64, 76}; // Dive coaster (21 & 24) not supported yet
+	
+	public bool onInit(){ // On initialization of Play simulation
+        // Get and assign local sco
+        SceneObject sco = sim.getSceneObjectForEntityId(getParentEntityId());
+        if (sco == null){
+            System.throwRuntimeException(SCRIPT_NAME + ": This script only works with NL2 scene objects");
+        }
+        
+        // Get all elements and hide them
+        SceneObjectElement[] rungs = new SceneObjectElement[sco.getElementCount()];
+        for (int i = 0; i < rungs.length; i++){
+            rungs[i] = sco.getElementAt(i);
+            rungs[i].setVisible(false);
+        }
+
+        // Get and sanitize entity parameters
+        int numRungs = sco.getIntegerParameter("num_rungs").intValue();
+        if (numRungs < 1 || numRungs > rungs.length){
+            System.err.println(SCRIPT_NAME + ": Number of rungs must be between 1 and " + rungs.length);
+            return false;
+        }
+        double offsetMeters = sco.getDoubleParameter("rung_spacing").doubleValue();
+        if (offsetMeters <= 0){
+            System.err.println(SCRIPT_NAME + ": Rung spacing must be greater than 0 meters");
+            return false;
+        }
+        if (sco.getBooleanParameter("reverse_direction").boolValue()){
+            offsetMeters = -offsetMeters;
+        }
+        
+        // Get closest track starting position, if possible
+        TrackPos curTrackPos = sim.findNearestCoasterTrack(sco.getTranslation(), 5.f);
+        if (curTrackPos == null){
+            System.err.println(SCRIPT_NAME + ": No track found within 5 meters!");
+            return false;
+        }
+        // Print warning if coaster style is un-supported
+        int coasterStyleId = curTrackPos.getCoaster().getCoasterStyleId();
+        for (int i = 0; i < BM_STYLE_IDS.length; i++){
+            if (coasterStyleId == BM_STYLE_IDS[i]){
+                coasterStyleId = -1;
+                break;
+            }
+        }
+        if (coasterStyleId != -1){
+            System.err.println(SCRIPT_NAME + ": The coaster style of \"" + curTrackPos.getCoaster().getName() + "\" is unfortunately un-supported at this time.");
+            return false;
+        }
+
+        // Set position of SCO to world origin
+        sco.setMatrix(new Matrix4x4f());
+
+        // Make used rungs visible
+        for (int i = 0; i < numRungs; i++){
+            rungs[i].setVisible(true);
+        }
+
+        // Set position of rungs
+        for (int i = 0; i < numRungs; i++){
+            rungs[i].setMatrix(curTrackPos.getCenterRailsMatrix());
+            curTrackPos = curTrackPos.getTrackPosOnCenterRailsWithOffset(offsetMeters);
+        }
+
+        return false; // Prevent onNextFrame calls
+	}
+}

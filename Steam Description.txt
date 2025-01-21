@@ -1,0 +1,43 @@
+[h1][u]Red's B&M Track Ladders[/u][/h1]
+[quote][b]A package of basic scripted ladder rungs that automatically attach along the spine of most B&M coaster style tracks.[/b][/quote]
+[i]Like what you see? Appreciate the work that went into making it?
+[img]https://i.imgur.com/ZpAhItL.gif[/img]
+Want to be even more awesome!? Supporting the project by donating helps me make more content like this in the future![/i]
+[url=https://www.paypal.com/donate?hosted_button_id=LT9DY39634NGL][img]https://i.imgur.com/aQKXQzV.png[/img][/url]
+[hr][/hr]
+[h1]Features:[/h1]
+[list]
+    [*]Attaches the track ladder rungs along the length of the closest track spine automatically
+    [*]Can be attached to any side of the spine (top, bottom, left, or right)
+    [*]The number of rungs, their spacing, and direction of travel can be configured with entity parameters.
+    [*]Re-colorable
+    [*]Lightweight, with ladder rungs that are low-poly and de-spawn when not close to the camera to save performance
+[/list]
+
+[hr][/hr]
+[h1]How to Extract & Use:[/h1]
+[list]
+    [*]Open the park in your editor.
+    [*]Click on File > Extract Package, and choose where you want to save the park.
+    [*]Open the park in your File Explorer. Then open the scenery folder.
+    [*]Copy the reds_bm_track_ladders folder to any park of your own that you want to use it with.
+    [*]Open your personal park in the editor.
+    [*]Select a ladder of your choosing and place the node next to the start (or end) of a desired track section.
+    [*]Double click the node for configuration settings. The ladder will appear along the spine of the track in Play mode.
+[/list]
+
+[hr][/hr]
+[h1]Known Issues:[/h1]
+Unfortunately, the ladders only accommodate standard size B&M track spines at this time due to complex relative-positioning issues. Therefore, the ladders may not work properly with the following:
+[list]
+    [*]Non-B&M coaster styles
+    [*]Dive Coaster styles
+    [*]Medium or Large Box spine types
+[/list]
+
+[hr][/hr]
+[h1]Usage / License:[/h1]
+[list]
+    [*]All parts of this pack (models, scripts, etc.) are licensed under the GNU General Public License v3.0.
+    [*]Please see the LICENSE file in the pack for more details on your rights to use this pack in your parks.
+[/list]
